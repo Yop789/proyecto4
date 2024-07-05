@@ -14,19 +14,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lopez.app.jpa.daos.IUsuarioDao;
+import com.lopez.app.jpa.dtos.UsuarioDto;
 import com.lopez.app.jpa.models.Usuario;
 import com.lopez.app.jpa.services.IService;
 import com.lopez.app.jpa.services.UsuariosService;
 
 @RestController
 @RequestMapping("api/users")
-public class UsuariosServlet implements IControllers<Usuario, UsuariosService> {
+public class UsuariosServlet implements IControllers<Usuario, UsuarioDto> {
     @Autowired
-    private IService<Usuario, UsuariosService> service;
+    private IService<Usuario, UsuarioDto> service;
 
     @Override
     @PostMapping("/registro")
-    public Map<String, String> guardar(@RequestBody UsuariosService dto) {
+    public Map<String, String> guardar(@RequestBody UsuarioDto dto) {
         service.save(dto);
         Map<String, String> response = new HashMap<>();
         response.put("msg", "Usuario registrado");
@@ -56,7 +58,7 @@ public class UsuariosServlet implements IControllers<Usuario, UsuariosService> {
 
     @Override
     @PutMapping
-    public Map<String, String> update(@RequestBody UsuariosService dto) {
+    public Map<String, String> update(@RequestBody UsuarioDto dto) {
         service.save(dto);
         Map<String, String> response = new HashMap<>();
         response.put("msg", "Usuario actualizado");
