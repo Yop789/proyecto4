@@ -5,6 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.lopez.app.jpa.daos.IUsuarioDao;
@@ -12,9 +18,11 @@ import com.lopez.app.jpa.dtos.UsuarioDto;
 import com.lopez.app.jpa.models.Usuario;
 
 @Component
-public class UsuariosService implements IService<Usuario, UsuarioDto> {
+public class UsuariosService implements IService<Usuario, UsuarioDto>, UserDetailsService {
     @Autowired
     private IUsuarioDao iUsuarioRepository;
+
+    private Usuario usuarioDetail;
 
     @Override
     public List<Usuario> findAll() {
@@ -54,6 +62,19 @@ public class UsuariosService implements IService<Usuario, UsuarioDto> {
         usuario.setEdad(t.getEdad());
         usuario.setRol(t.getRol());
         return usuario;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        usuarioDetail = iUsuarioRepository.findByusername(username);
+        return User.withUsername(usuarioDetail.getUsername())
+                .password(passwordEncoder().encode(usuarioDetail.getPassword()))
+                .roles(usuarioDetail.getRol()).build();
+
+    }
+
+    private PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }

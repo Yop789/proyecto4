@@ -19,7 +19,7 @@ import com.lopez.app.jpa.models.Corral;
 import com.lopez.app.jpa.services.IService;
 
 @RestController
-@RequestMapping("api/corral")
+@RequestMapping("api/corrales")
 public class CorralServlet implements IControllers<Corral, CorralDto> {
 
     @Autowired
