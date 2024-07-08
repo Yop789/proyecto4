@@ -1,5 +1,7 @@
 package com.lopez.app.jpa.dtos;
 
+import com.lopez.app.jpa.enums.EnumEstadoUsuario;
+
 public class UsuarioDto {
 
     private Long id;
@@ -19,6 +21,8 @@ public class UsuarioDto {
     private String telefono;
 
     private String username;
+
+    private EnumEstadoUsuario estado;
 
     public Long getId() {
         return id;
@@ -90,6 +94,14 @@ public class UsuarioDto {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public EnumEstadoUsuario getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EnumEstadoUsuario estado) {
+        this.estado = estado;
     }
 
 }

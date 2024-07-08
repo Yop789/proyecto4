@@ -1,5 +1,7 @@
 package com.lopez.app.jpa.models;
 
+import com.lopez.app.jpa.enums.EnumEstadoUsuario;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,9 @@ public class Usuario {
 
     @Column(name = "rol")
     private String rol;
+
+    @Column(name = "estado")
+    private EnumEstadoUsuario estado;
 
     public Long getId() {
         return id;
@@ -111,6 +116,14 @@ public class Usuario {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public EnumEstadoUsuario getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EnumEstadoUsuario estado) {
+        this.estado = estado;
     }
 
 }

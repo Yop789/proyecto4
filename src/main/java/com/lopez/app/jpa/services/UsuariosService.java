@@ -61,6 +61,7 @@ public class UsuariosService implements IService<Usuario, UsuarioDto>, UserDetai
         usuario.setTelefono(t.getTelefono());
         usuario.setEdad(t.getEdad());
         usuario.setRol(t.getRol());
+        usuario.setEstado(t.getEstado());
         return usuario;
     }
 
