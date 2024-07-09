@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lopez.app.jpa.dtos.DetalleLimpiarDto;
 import com.lopez.app.jpa.models.Detalle_limpiar;
-import com.lopez.app.jpa.services.IService;
+import com.lopez.app.jpa.services.IDetallesLimpiar;
 
 @RestController
 @RequestMapping("api/detallelimpiar")
 public class DetalleLimpiarServlet implements IControllers<Detalle_limpiar, DetalleLimpiarDto> {
 
     @Autowired
-    private IService<Detalle_limpiar, DetalleLimpiarDto> service;
+    private IDetallesLimpiar service;
 
     @Override
     @PostMapping
@@ -63,6 +63,11 @@ public class DetalleLimpiarServlet implements IControllers<Detalle_limpiar, Deta
         Map<String, String> response = new HashMap<>();
         response.put("msg", "Alimentar actualizado");
         return response;
+    }
+
+    @GetMapping("/limpieza/{id}")
+    public List<Detalle_limpiar> findByLimpiezaId(@PathVariable(name = "id") Long id) {
+        return service.findByLimpiezaId(id);
     }
 
 }

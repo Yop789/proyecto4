@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lopez.app.jpa.dtos.CorralDto;
 import com.lopez.app.jpa.models.Corral;
-import com.lopez.app.jpa.services.IService;
+import com.lopez.app.jpa.services.ICorralEService;
 
 @RestController
 @RequestMapping("api/corrales")
 public class CorralServlet implements IControllers<Corral, CorralDto> {
 
     @Autowired
-    IService<Corral, CorralDto> CorralService;
+    ICorralEService CorralService;
 
     @PostMapping
     public Map<String, String> guardar(@RequestBody CorralDto t) {
@@ -58,6 +58,12 @@ public class CorralServlet implements IControllers<Corral, CorralDto> {
         Map<String, String> response = new HashMap<>();
         response.put("msg", "Corral actualizado");
         return response;
+    }
+
+    @GetMapping("/especie/{especie}")
+    public List<Corral> getCorralEspecie(@PathVariable(name = "especie") String especie) {
+
+        return CorralService.findByEspecie(especie, "ACTIVO");
     }
 
 }

@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lopez.app.jpa.dtos.AnimalesDto;
 
 import com.lopez.app.jpa.models.Animales;
-import com.lopez.app.jpa.services.IService;
+import com.lopez.app.jpa.services.IAnimalService;
 
 @RestController
 @RequestMapping("api/animales")
 public class AnimalesServlet implements IControllers<Animales, AnimalesDto> {
 
     @Autowired
-    IService<Animales, AnimalesDto> iAnimalService;
+    IAnimalService iAnimalService;
 
     @Override
     @PostMapping
@@ -65,6 +65,11 @@ public class AnimalesServlet implements IControllers<Animales, AnimalesDto> {
         Map<String, String> response = new HashMap<>();
         response.put("msg", "Animal actualizado");
         return response;
+    }
+
+    @GetMapping("/corral/{id}")
+    public List<Animales> findByIdCorral(@PathVariable(name = "id") Long id) {
+        return iAnimalService.findByIdCorral(id);
     }
 
 }

@@ -13,7 +13,7 @@ import com.lopez.app.jpa.dtos.AnimalesDto;
 import com.lopez.app.jpa.models.Animales;
 
 @Component
-public class AnimalService implements IService<Animales, AnimalesDto> {
+public class AnimalService implements IAnimalService {
     @Autowired
     private IAnimalesDao iAnimalesDao;
 
@@ -55,6 +55,12 @@ public class AnimalService implements IService<Animales, AnimalesDto> {
         animales.setFechaNacimiento(t.getFechaNacimiento());
         animales.setCorral(iCorralDao.findById(t.getIdCorral()).get());
         return animales;
+    }
+
+    @Override
+    public List<Animales> findByIdCorral(Long idCorral) {
+
+        return iAnimalesDao.findByIdCorral(idCorral);
     }
 
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lopez.app.jpa.dtos.UsuarioDto;
 import com.lopez.app.jpa.enums.EnumEstadoUsuario;
 import com.lopez.app.jpa.enums.EnumRoles;
-import com.lopez.app.jpa.enums.TipoHeramienta;
 import com.lopez.app.jpa.models.Usuario;
 import com.lopez.app.jpa.services.IService;
 

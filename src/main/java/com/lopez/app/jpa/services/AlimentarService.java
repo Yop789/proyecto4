@@ -1,5 +1,6 @@
 package com.lopez.app.jpa.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,7 @@ import com.lopez.app.jpa.dtos.AlimentarDto;
 import com.lopez.app.jpa.models.Alimentar;
 
 @Component
-public class AlimentarService implements IService<Alimentar, AlimentarDto> {
+public class AlimentarService implements IAlimentar {
     @Autowired
     private IAlimentoDao iAlimentarDao;
 
@@ -62,5 +63,16 @@ public class AlimentarService implements IService<Alimentar, AlimentarDto> {
         alimentar.setFechaFinal(t.getFechaFinal());
         alimentar.setEstado(t.getEstado());
         return alimentar;
+    }
+
+    @Override
+    public Long saveReturId(AlimentarDto t) {
+        Alimentar d = iAlimentarDao.save(conver(t));
+        return d.getId();
+    }
+
+    @Override
+    public void update(Long id) {
+        iAlimentarDao.update(id, false, LocalDateTime.now());
     }
 }

@@ -9,10 +9,12 @@ import org.springframework.stereotype.Component;
 
 import com.lopez.app.jpa.daos.ICorralDao;
 import com.lopez.app.jpa.dtos.CorralDto;
+import com.lopez.app.jpa.enums.EstatusCorral;
+import com.lopez.app.jpa.enums.TipoEspecie;
 import com.lopez.app.jpa.models.Corral;
 
 @Component
-public class CorralService implements IService<Corral, CorralDto> {
+public class CorralService implements ICorralEService {
 
     @Autowired
     private ICorralDao iCorralDao;
@@ -51,6 +53,12 @@ public class CorralService implements IService<Corral, CorralDto> {
         corral.setTipoValla(t.getTipoValla());
         corral.setTipoAnimal(t.getTipoAnimal());
         return corral;
+    }
+
+    @Override
+    public List<Corral> findByEspecie(String especie, String estatus) {
+
+        return iCorralDao.findByEspecie(TipoEspecie.valueOf(especie), EstatusCorral.valueOf(estatus));
     }
 
 }

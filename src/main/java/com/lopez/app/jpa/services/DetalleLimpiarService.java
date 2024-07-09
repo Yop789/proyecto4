@@ -15,7 +15,7 @@ import com.lopez.app.jpa.dtos.DetalleLimpiarDto;
 import com.lopez.app.jpa.models.Detalle_limpiar;
 
 @Component
-public class DetalleLimpiarService implements IService<Detalle_limpiar, DetalleLimpiarDto> {
+public class DetalleLimpiarService implements IDetallesLimpiar {
     @Autowired
     private IDetalleLimpiarDao iDetalleLimpiarDao;
 
@@ -55,6 +55,12 @@ public class DetalleLimpiarService implements IService<Detalle_limpiar, DetalleL
         limpiar.setFecha(t.getFecha());
         limpiar.setFechaFin(t.getFechaFin());
         return limpiar;
+    }
+
+    @Override
+    public List<Detalle_limpiar> findByLimpiezaId(Long id) {
+
+        return iDetalleLimpiarDao.finByLimpizaId(id);
     }
 
 }

@@ -6,7 +6,7 @@ public class DetalleLimpiarDto {
 
     private Long id;
 
-    private Long id_limpiador;
+    private Long id_limpieza;
 
     private Long id_herramienta;
 
@@ -23,11 +23,11 @@ public class DetalleLimpiarDto {
     }
 
     public Long getId_limpiador() {
-        return id_limpiador;
+        return id_limpieza;
     }
 
-    public void setId_limpiador(Long id_limpiador) {
-        this.id_limpiador = id_limpiador;
+    public void setId_limpiador(Long id_limpieza) {
+        this.id_limpieza = id_limpieza;
     }
 
     public Long getId_herramienta() {

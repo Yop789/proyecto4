@@ -1,6 +1,5 @@
 package com.lopez.app.jpa.models;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;

@@ -1,5 +1,6 @@
 package com.lopez.app.jpa.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +15,14 @@ import com.lopez.app.jpa.dtos.LimpiarDto;
 import com.lopez.app.jpa.models.Limpiar;
 
 @Component
-public class LimpiarService implements IService<Limpiar, LimpiarDto> {
+public class LimpiarService implements ILimpiar {
     @Autowired
     private ILimpiarDao iLimpiarDao;
+
+    @Autowired
     private IUsuarioDao iUsuarioDao;
 
+    @Autowired
     private ICorralDao iCorralDao;
 
     @Override
@@ -47,14 +51,27 @@ public class LimpiarService implements IService<Limpiar, LimpiarDto> {
     }
 
     private Limpiar conver(LimpiarDto t) {
+
         Limpiar limpiar = new Limpiar();
         limpiar.setId(t.getId());
-        limpiar.setLimpiador(iUsuarioDao.findById(t.getId_limpiador()).get());
+        limpiar.setLimpiador(iUsuarioDao.findById(Long.valueOf(t.getId_limpiador())).get());
         limpiar.setCorral(iCorralDao.findById(t.getId_corral()).get());
         limpiar.setFecha(t.getFecha());
         limpiar.setFechaFinal(t.getFechaFin());
         limpiar.setEstado(t.getEstado());
         return limpiar;
+    }
+
+    @Override
+    public Long saveReturId(LimpiarDto t) {
+        Limpiar d = iLimpiarDao.save(conver(t));
+
+        return d.getId();
+    }
+
+    @Override
+    public void update(Long id) {
+        iLimpiarDao.update(id, false, LocalDateTime.now());
     }
 
 }
