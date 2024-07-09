@@ -20,6 +20,7 @@ import com.lopez.app.jpa.dtos.DetalleAlimentarDto;
 import com.lopez.app.jpa.models.Alimentar;
 import com.lopez.app.jpa.models.Detalle_alimentar;
 import com.lopez.app.jpa.services.IAlimentar;
+import com.lopez.app.jpa.services.IDetalleAlimentar;
 import com.lopez.app.jpa.services.IService;
 
 @RestController
@@ -29,7 +30,7 @@ public class AlimentarServlet implements IControllers<Alimentar, AlimentarDto> {
     IAlimentar iAlimentarService;
 
     @Autowired
-    private IService<Detalle_alimentar, DetalleAlimentarDto> detalleAlimentarService;
+    private IDetalleAlimentar detalleAlimentarService;
 
     @Override
     @PostMapping
@@ -96,6 +97,11 @@ public class AlimentarServlet implements IControllers<Alimentar, AlimentarDto> {
         response.put("msg", "Alimentar guardada");
         return response;
 
+    }
+
+    @GetMapping("/actualizar/{id}")
+    public void update(@PathVariable(name = "id") Long id) {
+        iAlimentarService.update(id);
     }
 
 }

@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lopez.app.jpa.dtos.DetalleAlimentarDto;
 import com.lopez.app.jpa.models.Detalle_alimentar;
-import com.lopez.app.jpa.services.IService;
+import com.lopez.app.jpa.services.IDetalleAlimentar;
 
 @RestController
 @RequestMapping("api/detallealimentar")
 public class DetalleAlimentarServlet implements IControllers<Detalle_alimentar, DetalleAlimentarDto> {
 
     @Autowired
-    IService<Detalle_alimentar, DetalleAlimentarDto> iService;
+    IDetalleAlimentar iService;
 
     @Override
     @PostMapping
@@ -63,6 +63,11 @@ public class DetalleAlimentarServlet implements IControllers<Detalle_alimentar, 
         Map<String, String> response = new HashMap<>();
         response.put("msg", "Alimentar actualizado");
         return response;
+    }
+
+    @GetMapping("/alimentar/{id}")
+    public List<Detalle_alimentar> findByAlimentarId(@PathVariable(name = "id") Long id) {
+        return iService.findByAlimentarId(id);
     }
 
 }

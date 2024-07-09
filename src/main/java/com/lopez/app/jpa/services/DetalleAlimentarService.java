@@ -10,11 +10,12 @@ import org.springframework.stereotype.Component;
 import com.lopez.app.jpa.daos.IAlimentoDao;
 import com.lopez.app.jpa.daos.IDetalleAlimentarDao;
 import com.lopez.app.jpa.daos.IHerramientasDao;
+
 import com.lopez.app.jpa.dtos.DetalleAlimentarDto;
 import com.lopez.app.jpa.models.Detalle_alimentar;
 
 @Component
-public class DetalleAlimentarService implements IService<Detalle_alimentar, DetalleAlimentarDto> {
+public class DetalleAlimentarService implements IDetalleAlimentar {
 
     @Autowired
     private IDetalleAlimentarDao iDetalleAlimentarDao;
@@ -54,6 +55,13 @@ public class DetalleAlimentarService implements IService<Detalle_alimentar, Deta
         alimentar.setHerramienta(iHerramientasDao.findById(t.getId_herramienta()).get());
         alimentar.setFecha(t.getFecha());
         alimentar.setFechaFin(t.getFechaFin());
+        return alimentar;
+    }
+
+    @Override
+    public List<Detalle_alimentar> findByAlimentarId(Long id) {
+        List<Detalle_alimentar> alimentar = new ArrayList<>();
+        alimentar = iDetalleAlimentarDao.finByAlimentarId(id);
         return alimentar;
     }
 
